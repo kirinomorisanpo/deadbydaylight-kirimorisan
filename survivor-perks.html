@@ -1,3 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>DBD サバイバーパーク一覧</title>
+
+<style>
+body {
+  background:#111;
+  color:#eee;
+  font-family: Arial, sans-serif;
+}
+.perk {
+  border:1px solid #333;
+  padding:10px;
+  margin:10px 0;
+}
+.perk-name {
+  font-weight:bold;
+}
+.perk-owner {
+  font-size:12px;
+  color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<h1>サバイバーパーク一覧</h1>
+
+<input id="search" placeholder="検索">
+
+<div id="perkGrid"></div>
+
 <script>
 const perks = [
 
@@ -106,4 +141,31 @@ const perks = [
 { name:"デッドライン", owner:"アラン", category:"objective", effect:"スキルチェック頻度が増加する。" }
 
 ];
+/* ==== 描画処理 ==== */
+const grid = document.getElementById("perkGrid");
+const search = document.getElementById("search");
+
+function render() {
+  grid.innerHTML = "";
+  const keyword = search.value.toLowerCase();
+
+  perks
+    .filter(p => p.name.includes(keyword))
+    .forEach(p => {
+      const div = document.createElement("div");
+      div.className = "perk";
+      div.innerHTML = `
+        <div class="perk-name">${p.name}</div>
+        <div class="perk-owner">${p.owner}</div>
+        <div>${p.effect}</div>
+      `;
+      grid.appendChild(div);
+    });
+}
+
+search.addEventListener("input", render);
+render();
 </script>
+
+</body>
+</html>
