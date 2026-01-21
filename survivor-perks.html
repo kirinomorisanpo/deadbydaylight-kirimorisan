@@ -34,113 +34,13 @@ body {
 <div id="perkGrid"></div>
 
 <script>
+/* ==== データ（テスト用3件） ==== */
 const perks = [
-
-/* ===== 共通 ===== */
-{ name:"血族", owner:"共通", category:"info", effect:"フック中、キラーと他の生存者の位置が可視化される。" },
-{ name:"希望", owner:"共通", category:"chase", effect:"脱出ゲート通電後、移動速度が上昇する。" },
-{ name:"凍りつく背筋", owner:"共通", category:"info", effect:"キラーがこちらを見ていると警告が発生する。" },
-{ name:"予感", owner:"共通", category:"info", effect:"近くにキラーがいると警告が発生する。" },
-{ name:"小さな獲物", owner:"共通", category:"info", effect:"トーテムの方向が可視化される。" },
-{ name:"身軽", owner:"共通", category:"chase", effect:"負傷中の行動速度が上昇する。" },
-{ name:"耐久設計", owner:"共通", category:"objective", effect:"修理効率が徐々に上昇する。" },
-
-/* ===== ドワイト ===== */
-{ name:"絆", owner:"ドワイト", category:"info", effect:"近くの生存者の位置が可視化される。" },
-{ name:"有能の証明", owner:"ドワイト", category:"support", effect:"協力作業時の速度が上昇する。" },
-{ name:"リーダー", owner:"ドワイト", category:"support", effect:"周囲の生存者の行動速度を上昇させる。" },
-
-/* ===== メグ ===== */
-{ name:"全力疾走", owner:"メグ", category:"chase", effect:"走り始めに短時間、大幅に加速する。" },
-{ name:"迅速", owner:"メグ", category:"stealth", effect:"高速行動時に通知を発生させない。" },
-{ name:"アドレナリン", owner:"メグ", category:"heal", effect:"通電時に回復し短時間加速する。" },
-
-/* ===== クローデット ===== */
-{ name:"セルフケア", owner:"クローデット", category:"heal", effect:"アイテムなしで自己治療できる。" },
-{ name:"共感", owner:"クローデット", category:"info", effect:"負傷・瀕死の生存者が可視化される。" },
-{ name:"植物学の知識", owner:"クローデット", category:"heal", effect:"治療速度が上昇する。" },
-
-/* ===== ジェイク ===== */
-{ name:"鋼の意思", owner:"ジェイク", category:"stealth", effect:"負傷時のうめき声を抑える。" },
-{ name:"サボタージュ", owner:"ジェイク", category:"support", effect:"工具箱なしでフックを破壊できる。" },
-{ name:"静音作業", owner:"ジェイク", category:"stealth", effect:"修理・破壊時の音を軽減する。" },
-
-/* ===== ネア ===== */
-{ name:"都会の逃走術", owner:"ネア", category:"stealth", effect:"しゃがみ移動速度が上昇する。" },
-{ name:"平常心", owner:"ネア", category:"stealth", effect:"恐怖状態でもスキルチェックが安定する。" },
-{ name:"ストリートワイズ", owner:"ネア", category:"support", effect:"アイテム消費を抑える。" },
-
-/* ===== デイビッド ===== */
-{ name:"デッド・ハード", owner:"デイビッド", category:"chase", effect:"負傷中にダッシュして攻撃を回避する。" },
-{ name:"我慢", owner:"デイビッド", category:"support", effect:"瀕死の回復速度が上昇する。" },
-{ name:"ノーワン・レフト・ビハインド", owner:"デイビッド", category:"support", effect:"通電後、救助性能が向上する。" },
-
-/* ===== ビル ===== */
-{ name:"ボロタイム", owner:"ビル", category:"support", effect:"救助時、耐久効果を付与する。" },
-{ name:"不滅", owner:"ビル", category:"heal", effect:"瀕死から自己回復できる。" },
-{ name:"置き去りにされた者", owner:"ビル", category:"info", effect:"最後の生存者になるとハッチが見える。" },
-
-/* ===== ローリー ===== */
-{ name:"決死の一撃", owner:"ローリー", category:"chase", effect:"担がれ中にスタンで脱出できる。" },
-{ name:"唯一の生存者", owner:"ローリー", category:"stealth", effect:"生存者が減るほど探知されにくくなる。" },
-{ name:"魂の守護", owner:"ローリー", category:"support", effect:"呪い解除後に耐久効果を得る。" },
-
-/* ===== エース ===== */
-{ name:"オープン・ハンド", owner:"エース", category:"info", effect:"オーラ可視化範囲を拡大する。" },
-{ name:"アップ・ザ・アンティ", owner:"エース", category:"support", effect:"運が上昇する。" },
-{ name:"エース・イン・ザ・ホール", owner:"エース", category:"support", effect:"宝箱から強化アイテムを入手できる。" },
-
-/* ===== フェン・ミン ===== */
-{ name:"テクニシャン", owner:"フェン・ミン", category:"objective", effect:"修理失敗時の爆発音を抑える。" },
-{ name:"警戒", owner:"フェン・ミン", category:"info", effect:"キラーの行動が一時的に可視化される。" },
-{ name:"高感度", owner:"フェン・ミン", category:"info", effect:"発電機の進行状況が分かる。" },
-
-/* ===== アダム ===== */
-{ name:"ディストラクション", owner:"アダム", category:"support", effect:"ロッカーから通知を発生させられる。" },
-{ name:"独学者", owner:"アダム", category:"heal", effect:"治療スキルチェック成功時に進行が増加する。" },
-{ name:"執念", owner:"アダム", category:"support", effect:"トークン消費で即時回復できる。" },
-
-/* ===== ジェーン ===== */
-{ name:"連帯感", owner:"ジェーン", category:"support", effect:"瀕死の仲間を回復すると自分も回復する。" },
-{ name:"ヘッド・オン", owner:"ジェーン", category:"chase", effect:"ロッカーから飛び出してキラーをスタンさせる。" },
-{ name:"ポイズド", owner:"ジェーン", category:"stealth", effect:"発電機修理完了後、足跡を残さない。" },
-
-/* ===== スティーブ ===== */
-{ name:"ベビーシッター", owner:"スティーブ", category:"support", effect:"救助後、仲間の痕跡を隠す。" },
-{ name:"セカンドウィンド", owner:"スティーブ", category:"heal", effect:"救助後、一定時間で自動回復する。" },
-{ name:"カマラデリー", owner:"スティーブ", category:"support", effect:"フック中に耐久時間が延びる。" },
-
-/* ===== ナンシー ===== */
-{ name:"内なる力", owner:"ナンシー", category:"heal", effect:"トーテム浄化後、ロッカーで回復できる。" },
-{ name:"フィクスド", owner:"ナンシー", category:"info", effect:"負傷中、足跡が可視化される。" },
-{ name:"より良い結果", owner:"ナンシー", category:"objective", effect:"修理速度が上昇する。" },
-
-/* ===== 木村結衣 ===== */
-{ name:"ブレイクアウト", owner:"木村結衣", category:"support", effect:"担がれた生存者の脱出を補助する。" },
-{ name:"ラッキー・ブレイク", owner:"木村結衣", category:"stealth", effect:"負傷後、痕跡を残さなくなる。" },
-{ name:"エニイ・ミーンズ・ネセサリー", owner:"木村結衣", category:"objective", effect:"倒された板を復活させられる。" },
-
-/* ===== ミカエラ ===== */
-{ name:"明暗の霊視", owner:"ミカエラ", category:"support", effect:"祝福したトーテムの効果を強化する。" },
-{ name:"サークル・オブ・ヒーリング", owner:"ミカエラ", category:"heal", effect:"祝福トーテム内で治療が高速化する。" },
-{ name:"霊視", owner:"ミカエラ", category:"info", effect:"一定範囲内のオブジェクトが可視化される。" },
-
-/* ===== レベッカ ===== */
-{ name:"ハイパーフォーカス", owner:"レベッカ", category:"objective", effect:"スキルチェック成功で修理効率が上昇する。" },
-{ name:"より良い治療", owner:"レベッカ", category:"heal", effect:"治療が高速化する。" },
-{ name:"安心感", owner:"レベッカ", category:"support", effect:"救助時にキラーのフック進行を停止させる。" },
-
-/* ===== エレン・リプリー ===== */
-{ name:"ラッキー・スター", owner:"リプリー", category:"stealth", effect:"ロッカー使用後、痕跡を隠す。" },
-{ name:"ケミカル・トラップ", owner:"リプリー", category:"chase", effect:"板に減速効果を付与する。" },
-{ name:"ライトフット", owner:"リプリー", category:"stealth", effect:"走行音と足跡を軽減する。" },
-
-/* ===== アラン・ウェイク ===== */
-{ name:"チャンピオン・オブ・ライト", owner:"アラン", category:"support", effect:"懐中電灯の効果を強化する。" },
-{ name:"ブーン：イルミネーション", owner:"アラン", category:"info", effect:"祝福トーテム内で可視化能力を得る。" },
-{ name:"デッドライン", owner:"アラン", category:"objective", effect:"スキルチェック頻度が増加する。" }
-
+  { name:"デッド・ハード", owner:"デイビッド", category:"chase", effect:"負傷中にダッシュする。" },
+  { name:"全力疾走", owner:"メグ", category:"chase", effect:"走り始めに加速する。" },
+  { name:"血族", owner:"共通", category:"info", effect:"フック中に可視化される。" }
 ];
+
 /* ==== 描画処理 ==== */
 const grid = document.getElementById("perkGrid");
 const search = document.getElementById("search");
